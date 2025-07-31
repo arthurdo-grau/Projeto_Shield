@@ -75,6 +75,7 @@
                         <a href="../funcionarios/cadastro_funcionarios.php">Funcionários</a>
                         <a href="../cargos/cadastro_cargos.php">Cargos</a>
                         <a href="../animais/cadastro_animais.php">Animais</a>
+                        <a href="../veiculos/cadastro_veiculos.php">Veículos</a>
                     </div>
                 </li>
             </ul>
@@ -185,7 +186,10 @@
 
                     <div class="form-group">
                             <label for="veiculo">Veículo:</label>
-                            <input type="text" id="veiculo" name="veiculo" placeholder="Marca/Modelo - Placa">
+                        <select id="veiculo" name="veiculo">
+                            <option value="Não possui">Não possui</option>
+                            <option value="Possui">Possui</option>
+                        </select>
                         </div>
                     </div>
 
@@ -197,6 +201,21 @@
                             Possui animal de estimação?
                         </label>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="tem_veiculo">
+                            <input type="checkbox" id="tem_veiculo" name="tem_veiculo" value="1" onchange="toggleVeiculoInfo()"> 
+                            Possui veículo?
+                        </label>
+                    </div>
+                </div>
+
+                <div id="veiculo-info" style="display: none; background: #e8f4fd; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; border-left: 4px solid #3498db;">
+                    <p style="margin: 0; color: #2c3e50;">
+                        <i class="fas fa-info-circle"></i> 
+                        <strong>Informação:</strong> Para cadastrar os detalhes do veículo (placa, modelo, cor), 
+                        acesse o menu <strong>Cadastros > Veículos</strong> após salvar o morador.
+                    </p>
                 </div>
 
 
@@ -289,6 +308,21 @@
             EmailValidator.setupEmailValidation('email', 'email-error');
             CPFValidator.setupCompleteValidation('cpf', 'cpf-error', 'moradores');
         });
+        
+        // Função para mostrar/ocultar informação sobre veículo
+        function toggleVeiculoInfo() {
+            const checkbox = document.getElementById('tem_veiculo');
+            const veiculoInfo = document.getElementById('veiculo-info');
+            const veiculoSelect = document.getElementById('veiculo');
+            
+            if (checkbox.checked) {
+                veiculoInfo.style.display = 'block';
+                veiculoSelect.value = 'Possui';
+            } else {
+                veiculoInfo.style.display = 'none';
+                veiculoSelect.value = 'Não possui';
+            }
+        }
         
         // Função para mostrar/ocultar formulário de animal
         function toggleAnimalForm() {

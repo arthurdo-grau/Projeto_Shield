@@ -28,4 +28,20 @@ if (mysqli_num_rows($check_animais) == 0) {
     mysqli_query($conn, "ALTER TABLE tb_animais ADD COLUMN id_morador INT");
     mysqli_query($conn, "ALTER TABLE tb_animais ADD FOREIGN KEY (id_morador) REFERENCES tb_moradores(id_moradores)");
 }
+
+$check_veiculos = mysqli_query($conn, "SHOW COLUMNS FROM tb_veiculos LIKE 'id_morador'");
+if (mysqli_num_rows($check_veiculos) == 0) {
+    mysqli_query($conn, "ALTER TABLE tb_veiculos ADD COLUMN id_morador INT");
+    mysqli_query($conn, "ALTER TABLE tb_veiculos ADD FOREIGN KEY (id_morador) REFERENCES tb_moradores(id_moradores)");
+}
+
+// Verificar se a coluna veiculo na tb_moradores existe e alterar para indicar se possui veículo
+$check_morador_veiculo = mysqli_query($conn, "SHOW COLUMNS FROM tb_moradores LIKE 'veiculo'");
+if (mysqli_num_rows($check_morador_veiculo) > 0) {
+    // Verificar se é VARCHAR(45) e alterar para indicar apenas se possui ou não
+    $column_info = mysqli_fetch_array($check_morador_veiculo);
+    if (strpos($column_info['Type'], 'varchar') !== false) {
+        // Manter como está para compatibilidade, mas usar para indicar "Possui" ou "Não possui"
+    }
+}
 ?>
