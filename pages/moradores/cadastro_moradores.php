@@ -49,26 +49,8 @@
                 if (mysqli_query($conn, $sql)) {
                     $id_morador = mysqli_insert_id($conn);
                     
-                    // Verificar se tem dados do animal
-                    if (isset($_POST['tem_animal']) && $_POST['tem_animal'] == '1' && !empty($_POST['nome_animal'])) {
-                        $nome_animal = mysqli_real_escape_string($conn, $_POST["nome_animal"]);
-                        $tipo_animal = mysqli_real_escape_string($conn, $_POST["tipo_animal"]);
-                        $porte_animal = mysqli_real_escape_string($conn, $_POST["porte_animal"]);
-                        $observacoes_animal = mysqli_real_escape_string($conn, $_POST["observacoes_animal"]);
+                    
                         
-                        $sql_animal = "INSERT INTO tb_animais (nome, tipo, porte, observacoes, id_morador) 
-                                      VALUES ('$nome_animal', '$tipo_animal', '$porte_animal', '$observacoes_animal', '$id_morador')";
-                        
-                        if (mysqli_query($conn, $sql_animal)) {
-                            echo "<script>alert('Morador e animal cadastrados com sucesso!'); window.location = 'consultar_moradores.php';</script>";
-                        } else {
-                            echo "<script>alert('Morador cadastrado, mas erro ao cadastrar animal: " . mysqli_error($conn) . "');</script>";
-                        }
-                    } else {
-                        echo "<script>alert('Morador cadastrado com sucesso!'); window.location = 'consultar_moradores.php';</script>";
-                    }
-                } else {
-                    echo "<script>alert('Erro ao cadastrar morador: " . mysqli_error($conn) . "');</script>";
                 }
             }
         }
@@ -211,53 +193,15 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="tem_animal">
-                            <input type="checkbox" id="tem_animal" name="tem_animal" value="1" onchange="toggleAnimalForm()"> 
+                            <input type="checkbox" id="tem_animal" name="animais" value="sim" onchange="toggleAnimalForm()"> 
                             Possui animal de estimação?
                         </label>
                     </div>
                 </div>
 
-                <!-- Formulário de Animal (inicialmente oculto) -->
-                <div id="animal-form-section" style="display: none;">
-                    <h4 style="color: var(--primary-color); margin: 1.5rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
-                        <i class="fas fa-paw"></i> Dados do Animal
-                    </h4>
+
                     
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nome_animal">Nome do Animal:</label>
-                            <input type="text" id="nome_animal" name="nome_animal">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tipo_animal">Tipo:</label>
-                            <select id="tipo_animal" name="tipo_animal">
-                                <option value="">Selecione o tipo</option>
-                                <option value="Cão">Cão</option>
-                                <option value="Gato">Gato</option>
-                                <option value="Pássaro">Pássaro</option>
-                                <option value="Peixe">Peixe</option>
-                                <option value="Outro">Outro</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                         <div class="form-group">
-                             <label for="porte_animal">Porte:</label>
-                             <select id="porte_animal" name="porte_animal">
-                                 <option value="">Selecione o porte</option>
-                                 <option value="Pequeno">Pequeno</option>
-                                 <option value="Médio">Médio</option>
-                                 <option value="Grande">Grande</option>
-                             </select>
-                         </div>
-                    </div>
-
-                    <div class="form-group full-width">
-                        <label for="observacoes_animal">Observações sobre o Animal:</label>
-                        <textarea id="observacoes_animal" name="observacoes_animal" rows="3" placeholder="Informações adicionais sobre o animal (vacinas, comportamento, etc.)"></textarea>
-                    </div>
+                    
                 </div>
 
                     <div class="form-actions">
