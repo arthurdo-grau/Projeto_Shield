@@ -357,7 +357,7 @@ main {
 /* Cards de Animais */
 .cards-animais {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: 2fr 2fr;
     gap: 1.5rem;
     margin-top: 1rem;
 }
@@ -910,6 +910,24 @@ button:hover, .btn-primary:hover, .btn-secondary:hover, .btn-success:hover, .btn
 
 .status-presente {
     background-color: var(--success-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-warning {
+    background-color: var(--warning-color);
+    color: #856404;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-inactive {
+    background-color: #6c757d;
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
